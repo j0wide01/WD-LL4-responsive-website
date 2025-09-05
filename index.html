@@ -1,16 +1,242 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>LiveLab 4 Demo</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nomadiq Travel Destinations</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Merriweather+Sans&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Merriweather Sans', sans-serif;
+      background-color: #FAFAF7;
+      color: #2f5e4e;
+      line-height: 1.7;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: #f4f9f4;
+      border-bottom: 2px solid #d9e6d5;
+      position: relative;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #2f5e4e;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover { transform: scale(1.05); }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #2f5e4e;
+      font-weight: 500;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    nav a:hover { color: #559e83; transform: translateY(-2px); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: #2f5e4e;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active div:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.active div:nth-child(2) { opacity: 0; }
+    .hamburger.active div:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
+    @media (max-width: 600px) {
+      nav ul {
+        display: none;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background-color: #f4f9f4;
+        flex-direction: column;
+        width: 100%;
+        padding: 1rem 2rem;
+        gap: 1rem;
+        border-top: 1px solid #d9e6d5;
+      }
+      nav ul.active { display: flex; }
+      .hamburger { display: flex; }
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 5rem 2rem;
+      background-color: #A8DADC;
+      transition: background-color 0.3s ease;
+    }
+
+    .hero:hover { background-color: #97c9c9; }
+
+    .hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #2f5e4e;
+      line-height: 1.2;
+      transition: transform 0.3s ease;
+    }
+
+    .hero h1:hover { transform: scale(1.02); }
+
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.15rem;
+      color: #26453D;
+      line-height: 1.8;
+      transition: color 0.3s ease;
+    }
+
+    .hero p:hover { color: #2f5e4e; }
+
+    /* About */
+    .about {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .about h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+      color: #4C956C;
+    }
+
+    .about p {
+      max-width: 800px;
+      margin: 0 auto 1.5rem auto;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #26453D;
+    }
+
+    .cta-text { font-weight: 600; margin-bottom: 1rem; }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 0.8rem 1.6rem;
+      background-color: #4C956C;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      background-color: #3a7756;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    @media (min-width: 600px) {
+      header { flex-direction: row; }
+      nav ul { display: flex !important; flex-direction: row; gap: 1.5rem; position: static; width: auto; background: none; padding: 0; }
+      .hero { padding: 6rem 2rem; }
+      .hero h1 { font-size: 3rem; }
+      .hero p { font-size: 1.25rem; }
+      .about { padding: 5rem 2rem; }
+      .about h2 { font-size: 2.2rem; }
+      .about p { font-size: 1.15rem; }
+    }
+  </style>
 </head>
-
 <body>
-  Hello world
-  <script src="script.js"></script>
-</body>
 
+<header>
+  <div class="logo">🌍 Nomadiq Travel Destinations</div>
+  <nav>
+    <div class="hamburger" id="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <ul id="nav-menu">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Destinations</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Explore Sustainable Travel</h1>
+  <p>
+    Discover the beauty of the world while leaving a positive impact behind. 
+    Our journeys focus on eco-friendly practices, support for local communities, 
+    and unforgettable experiences that respect nature and culture. 
+    Travel with purpose, adventure with care.
+  </p>
+</section>
+
+<section class="about">
+  <h2>About Nomadiq Travel Destinations</h2>
+  <p>
+    At Nomadiq Travel Destinations, we believe that exploring the world 
+    should go hand in hand with protecting it. Our trips are designed with 
+    sustainability in mind — from eco-friendly accommodations and 
+    low-impact adventures to partnerships with local communities. 
+    We invite you to travel with purpose, leaving a positive footprint 
+    wherever your journey takes you.
+  </p>
+  <p class="cta-text">Ready to start your next eco-friendly adventure?</p>
+  <a href="#destinations" class="cta-btn">Plan Your Trip</a>
+</section>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navMenu = document.getElementById('nav-menu');
+
+  hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    hamburger.classList.toggle('active');
+  });
+</script>
+
+</body>
 </html>
